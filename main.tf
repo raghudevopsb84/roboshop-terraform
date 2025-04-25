@@ -345,8 +345,6 @@ resource "azurerm_virtual_machine" "mysql" {
   }
   os_profile_linux_config {
     disable_password_authentication = false
-    public_ip_address_id          = azurerm_public_ip.mysql.id
-
   }
 }
 
