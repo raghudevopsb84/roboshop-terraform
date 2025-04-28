@@ -18,6 +18,11 @@ resource "azurerm_network_interface" "privateip" {
   }
 }
 
+resource "azurerm_network_interface_security_group_association" "nsg-attach" {
+  network_interface_id      = azurerm_network_interface.privateip.id
+  network_security_group_id = var.network_security_group_id
+}
+
 resource "azurerm_virtual_machine" "vm" {
   name                          = var.name
   location                      = var.location
@@ -45,6 +50,10 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile_linux_config {
     disable_password_authentication = false
+  }
+
+  provisioner "local-exec" {
+    command = "echo ${self.private_ip} >> private_ips.txt"
   }
 }
 
