@@ -64,7 +64,8 @@ resource "null_resource" "anisble" {
   provisioner "remote-exec" {
     inline = [
       "sudo dnf install python3.12 python3.12-pip -y",
-      "sudo pip3.12 install ansible"
+      "sudo pip3.12 install ansible",
+      "ansible-pull -i localhost, -U https://github.com/raghudevopsb84/roboshop-ansible roboshop.yml -e app_name=${var.name} -e env=dev"
     ]
   }
 }
