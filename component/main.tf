@@ -52,9 +52,9 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = false
   }
 
-  provisioner "local-exec" {
-    command = "echo ${self.private_ip} >> private_ips.txt"
-  }
+#   provisioner "local-exec" {
+#     command = "echo ${self.private_ip} >> private_ips.txt"
+#   }
 }
 
 
