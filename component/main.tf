@@ -52,9 +52,20 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = false
   }
 
-#   provisioner "local-exec" {
-#     command = "echo ${self.private_ip} >> private_ips.txt"
-#   }
+  connection {
+    type     = "ssh"
+    user     = "azuser"
+    password = "DevOps@123456"
+    host     = azurerm_network_interface.privateip.id
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo dnf install python3.12 python3.12-pip -y",
+      "sudo pip3.12 install ansible"
+    ]
+  }
+
 }
 
 
