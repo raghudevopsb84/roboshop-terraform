@@ -51,7 +51,9 @@ resource "azurerm_virtual_machine" "vm" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
+}
 
+resource "null_resource" "anisble" {
   connection {
     type     = "ssh"
     user     = "azuser"
@@ -65,7 +67,6 @@ resource "azurerm_virtual_machine" "vm" {
       "sudo pip3.12 install ansible"
     ]
   }
-
 }
 
 
