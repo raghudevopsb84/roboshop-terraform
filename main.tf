@@ -22,7 +22,7 @@ module "databases" {
 module "applications" {
   depends_on                 = [ module.databases ]
   for_each                   = var.applications
-  source                     = "modules/vm"
+  source                     = "./modules/vm"
   ip_configuration_subnet_id = var.ip_configuration_subnet_id
   name                       = each.key
   rg_name                    = module.resource-group[each.value["rgname"]].name
