@@ -4,26 +4,38 @@ zone_name                  = "rdevopsb84.online"
 storage_image_reference_id = "/subscriptions/323379f3-3beb-4865-821e-0fff68e4d4ca/resourceGroups/project-setup-1/providers/Microsoft.Compute/images/local-devops-practice"
 network_security_group_id  = "/subscriptions/323379f3-3beb-4865-821e-0fff68e4d4ca/resourceGroups/project-setup-1/providers/Microsoft.Network/networkSecurityGroups/allow-all"
 databases = {
-  mongodb  = {
-      rgname = "ukwest"
+  mongodb = {
+    rgname = "ukwest"
   }
   rabbitmq = {
-      rgname = "ukwest"
+    rgname = "ukwest"
   }
-  mysql    = {
-      rgname = "ukwest"
+  mysql = {
+    rgname = "ukwest"
   }
-  redis    = {
-      rgname = "ukwest"
+  redis = {
+    rgname = "ukwest"
   }
 }
 applications = {
-  catalogue = {}
-  user      = {}
-  cart      = {}
-  payment   = {}
-  shipping  = {}
-  frontend  = {}
+  catalogue = {
+    rgname = "ukwest"
+  }
+  user = {
+    rgname = "ukwest"
+  }
+  cart = {
+    rgname = "ukwest"
+  }
+  payment = {
+    rgname = "ukwest"
+  }
+  shipping = {
+    rgname = "ukwest"
+  }
+  frontend = {
+    rgname = "ukwest"
+  }
 }
 rg_name = {
   ukwest = {
