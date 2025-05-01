@@ -33,5 +33,5 @@ module "resource-group" {
 #
 
 output "rg" {
-  value = module.resource-group
+  value = module.resource-group["ukwest"].name
 }
