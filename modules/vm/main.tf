@@ -53,25 +53,25 @@ resource "azurerm_virtual_machine" "vm" {
   }
 }
 
-# resource "null_resource" "ansible" {
-#   depends_on = [
-#     azurerm_virtual_machine.vm
-#   ]
-#   connection {
-#     type     = "ssh"
-#     user     = data.vault_generic_secret.ssh.data["username"]
-#     password = data.vault_generic_secret.ssh.data["password"]
-#     host     = azurerm_network_interface.privateip.private_ip_address
-#   }
-#
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo dnf install python3.12 python3.12-pip -y",
-#       "sudo pip3.12 install ansible",
-#       "ansible-pull -i localhost, -U https://github.com/raghudevopsb84/roboshop-ansible roboshop.yml -e app_name=${var.name} -e env=dev"
-#     ]
-#   }
-# }
+resource "null_resource" "ansible" {
+  depends_on = [
+    azurerm_virtual_machine.vm
+  ]
+  connection {
+    type     = "ssh"
+    user     = data.vault_generic_secret.ssh.data["username"]
+    password = data.vault_generic_secret.ssh.data["password"]
+    host     = azurerm_network_interface.privateip.private_ip_address
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo dnf install python3.12 python3.12-pip -y",
+      "sudo pip3.12 install ansible",
+      "ansible-pull -i localhost, -U https://github.com/raghudevopsb84/roboshop-ansible roboshop.yml -e app_name=${var.name} -e env=dev -e token=${var.token}"
+    ]
+  }
+}
 
 
 resource "azurerm_dns_a_record" "dns_record" {
