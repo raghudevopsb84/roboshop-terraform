@@ -7,3 +7,9 @@ terraform {
   backend "azurerm" {}
 }
 
+provider "vault" {
+  address = "http://vault.rdevopsb84.online:8200"
+  token = var.token
+}
+
+
