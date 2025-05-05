@@ -44,8 +44,8 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile {
     computer_name  = var.name
-    admin_username = "azuser"
-    admin_password = "DevOps@123456"
+    admin_username = data.vault_generic_secret.ssh.data["username"]
+    admin_password = data.vault_generic_secret.ssh.data["password"]
   }
 
   os_profile_linux_config {
@@ -53,26 +53,25 @@ resource "azurerm_virtual_machine" "vm" {
   }
 }
 
-resource "null_resource" "ansible" {
-  depends_on = [
-    azurerm_virtual_machine.vm
-  ]
-  connection {
-    type     = "ssh"
-    user     = data.vault_generic_secret.ssh.data["username"]
-    password = data.vault_generic_secret.ssh.data["password"]
-    host     = azurerm_network_interface.privateip.private_ip_address
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "echo OK"
+# resource "null_resource" "ansible" {
+#   depends_on = [
+#     azurerm_virtual_machine.vm
+#   ]
+#   connection {
+#     type     = "ssh"
+#     user     = data.vault_generic_secret.ssh.data["username"]
+#     password = data.vault_generic_secret.ssh.data["password"]
+#     host     = azurerm_network_interface.privateip.private_ip_address
+#   }
+#
+#   provisioner "remote-exec" {
+#     inline = [
 #       "sudo dnf install python3.12 python3.12-pip -y",
 #       "sudo pip3.12 install ansible",
 #       "ansible-pull -i localhost, -U https://github.com/raghudevopsb84/roboshop-ansible roboshop.yml -e app_name=${var.name} -e env=dev"
-    ]
-  }
-}
+#     ]
+#   }
+# }
 
 
 resource "azurerm_dns_a_record" "dns_record" {
