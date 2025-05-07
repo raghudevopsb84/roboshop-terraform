@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "vault" {
-  address = "http://vault.rdevopsb84.online:8200"
+  address = "http://vault-int.rdevopsb84.online:8200"
   token = var.token
 }
 
