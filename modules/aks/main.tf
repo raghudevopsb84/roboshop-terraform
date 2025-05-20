@@ -21,7 +21,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   network_profile {
     network_plugin = "azure"
-    pod_cidr = "10.100.0.0/24"
+    service_cidr = "10.100.0.0/24"
   }
 
 }
