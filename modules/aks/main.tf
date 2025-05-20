@@ -19,5 +19,10 @@ resource "azurerm_kubernetes_cluster" "main" {
     subnet_name = "/subscriptions/323379f3-3beb-4865-821e-0fff68e4d4ca/resourceGroups/project-setup-1/providers/Microsoft.Network/virtualNetworks/main/subnets/default"
   }
 
+  network_plugin {
+    network_plugin = "azure"
+    pod_cidr = "10.100.0.0/24"
+  }
+
 }
 
