@@ -5,9 +5,9 @@ resource "azurerm_kubernetes_cluster" "main" {
   dns_prefix          = "roboshop"
 
   default_node_pool {
-    name       = "default"
-    node_count = 1
-    vm_size    = "Standard_D2_v2"
+    name           = "default"
+    node_count     = 1
+    vm_size        = "Standard_D2_v2"
     vnet_subnet_id = "/subscriptions/323379f3-3beb-4865-821e-0fff68e4d4ca/resourceGroups/project-setup-1/providers/Microsoft.Network/virtualNetworks/main/subnets/default"
   }
 
@@ -21,7 +21,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   network_profile {
     network_plugin = "azure"
-    service_cidr = "10.100.0.0/24"
+    service_cidr   = "10.100.0.0/24"
     dns_service_ip = "10.100.0.10"
   }
 
