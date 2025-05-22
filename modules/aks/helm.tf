@@ -20,7 +20,7 @@ resource "helm_release" "external-secrets" {
   }
 }
 
-resource "null_resource" "kubeconfig" {
+resource "null_resource" "project-secret-store" {
   depends_on = [
     helm_release.external-secrets
   ]
