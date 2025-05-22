@@ -43,4 +43,6 @@ module "aks" {
   name        = each.key
   rg_name     = module.resource-group[each.value["rgname"]].name
   rg_location = module.resource-group[each.value["rgname"]].location
+  env         = var.env
+  token       = var.token
 }
