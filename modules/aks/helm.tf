@@ -1,4 +1,8 @@
 resource "null_resource" "kubeconfig" {
+  depends_on = [
+    azurerm_kubernetes_cluster.main
+  ]
+
   provisioner "local-exec" {
     command = "az aks get-credentials --name ${var.name} --resource-group ${var.rg_name} --overwrite-existing"
   }
