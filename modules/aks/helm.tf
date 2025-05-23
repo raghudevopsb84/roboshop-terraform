@@ -30,7 +30,7 @@ resource "null_resource" "external-secrets-secret-store" {
   ]
 
   provisioner "local-exec" {
-    command =<<TF
+    command = <<TF
 kubectl apply -f - <<KUBE
 apiVersion: external-secrets.io/v1
 kind: ClusterSecretStore
