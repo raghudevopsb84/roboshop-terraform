@@ -28,14 +28,15 @@ resource "azurerm_kubernetes_cluster" "main" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "main" {
-  for_each              = var.app_node_pool
-  name                  = each.key
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
-  vm_size               = each.value["vm_size"]
-  node_count            = each.value["min_count"]
-  min_count             = each.value["min_count"]
-  max_count             = each.value["max_count"]
-  auto_scaling_enabled  = each.value["auto_scaling_enabled"]
-  node_labels           = each.value["node_labels"]
+  for_each                    = var.app_node_pool
+  name                        = each.key
+  kubernetes_cluster_id       = azurerm_kubernetes_cluster.main.id
+  vm_size                     = each.value["vm_size"]
+  node_count                  = each.value["min_count"]
+  min_count                   = each.value["min_count"]
+  max_count                   = each.value["max_count"]
+  auto_scaling_enabled        = each.value["auto_scaling_enabled"]
+  node_labels                 = each.value["node_labels"]
+  temporary_name_for_rotation = "${each.key}-temp"
 }
 
