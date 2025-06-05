@@ -8,5 +8,6 @@ jobs:
     steps:
       - name: Terraform Apply
         run: |
+           ls -l
            make dev-apply token=${vault_token}
 
