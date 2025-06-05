@@ -6,6 +6,7 @@ jobs:
     env:
       vault_token: ${{ secrets.vault_token }}
     steps:
+      - uses: actions/checkout@v4
       - name: Terraform Apply
         run: |
            ls -l
