@@ -24,7 +24,7 @@ jobs:
            export ARM_CLIENT_SECRET="${{ env.ARM_CLIENT_SECRET }}"
            export ARM_TENANT_ID="${{ env.ARM_TENANT_ID }}"
            export ARM_SUBSCRIPTION_ID="${{ env.ARM_SUBSCRIPTION_ID }}"
-           mkdir /home/github/.kube
+           mkdir -p /home/github/.kube
            kubectl config set-cluster dummy-cluster --server=https://1.2.3.4 --insecure-skip-tls-verify=true
            make dev-apply token=${vault_token}
 
