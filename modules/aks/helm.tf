@@ -26,10 +26,12 @@ resource "helm_release" "external-secrets" {
   chart            = "external-secrets"
   namespace        = "devops"
   create_namespace = true
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
+  set = [
+      {
+        name  = "installCRDs"
+        value = "true"
+      }
+    ]
 }
 
 # resource "null_resource" "external-secrets-secret-store" {
