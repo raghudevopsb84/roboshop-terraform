@@ -48,6 +48,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
 }
 
 output "aks" {
-  value = azurerm_kubernetes_cluster.main
+  value = azurerm_kubernetes_cluster.main.kubelet_identity
 }
 
