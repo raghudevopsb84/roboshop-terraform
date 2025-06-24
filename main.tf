@@ -52,5 +52,5 @@ module "aks" {
 
 
 output "aks" {
-  value = module.aks.aks
+  value = module.aks
 }
