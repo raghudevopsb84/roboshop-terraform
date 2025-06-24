@@ -47,3 +47,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   vnet_subnet_id              = var.vnet_subnet_id
 }
 
+output "aks" {
+  value = azurerm_kubernetes_cluster.main
+}
+
