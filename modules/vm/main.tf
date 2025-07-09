@@ -64,6 +64,10 @@ resource "null_resource" "ansible" {
     host     = azurerm_network_interface.privateip.private_ip_address
   }
 
+  triggers = {
+    always = timestamp()
+  }
+
   provisioner "remote-exec" {
     inline = [
       "sudo dnf install python3.12 python3.12-pip -y",
