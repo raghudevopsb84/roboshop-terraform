@@ -50,7 +50,7 @@ aks = {
     rgname = "ukwest"
     default_node_pool = {
       nodes   = 1
-      vm_size = "Standard_D2_v2"
+      vm_size = "Standard_D3_v2"
     }
     app_node_pool = {
       one = {
