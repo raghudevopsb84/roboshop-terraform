@@ -16,7 +16,7 @@ module "vnet" {
 }
 
 output "subnet_ids" {
-  value = module.vnet.subnet_id
+  value = module.vnet
 }
 
 # module "databases" {
