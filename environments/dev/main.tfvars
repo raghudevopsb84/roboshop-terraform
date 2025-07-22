@@ -74,10 +74,10 @@ aks = {
 vnets = {
   main-dev = {
     rgname        = "ukwest"
-    address_space = ["10.0.0.0/24"]
+    address_space = ["10.50.0.0/24"]
     subnets = {
       main = {
-        address_prefixes = ["10.0.0.0/24"]
+        address_prefixes = ["10.50.0.0/24"]
       }
     }
   }
