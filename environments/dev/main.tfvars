@@ -66,3 +66,10 @@ aks = {
 
   }
 }
+
+
+vnets = {
+  main-dev = {
+    rgname = "ukwest"
+  }
+}
