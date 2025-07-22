@@ -15,6 +15,10 @@ module "vnet" {
   subnets             = each.value["subnets"]
 }
 
+output "subnet_ids" {
+  value = module.vnet.subnet_id
+}
+
 # module "databases" {
 #   for_each                   = var.databases
 #   source                     = "./modules/vm"
