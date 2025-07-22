@@ -16,7 +16,7 @@ module "vnet" {
 }
 
 output "subnet_ids" {
-  value = module.vnet
+  value = module.vnet["main-dev"].subnet_id["main"].address_prefixes
 }
 
 # module "databases" {
