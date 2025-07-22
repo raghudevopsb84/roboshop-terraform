@@ -18,11 +18,29 @@ resource "azurerm_network_interface" "privateip" {
   }
 }
 
-# resource "azurerm_network_interface_security_group_association" "nsg-attach" {
-#   network_interface_id      = azurerm_network_interface.privateip.id
-#   network_security_group_id = var.network_security_group_id
-# }
-#
+resource "azurerm_network_security_group" "main" {
+  name                = var.name
+  location            = var.rg_location
+  resource_group_name = var.rg_name
+
+  security_rule {
+    name                       = "test123"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_network_interface_security_group_association" "nsg-attach" {
+  network_interface_id      = azurerm_network_interface.privateip.id
+  network_security_group_id = azurerm_network_security_group.main.id
+}
+
 # resource "azurerm_virtual_machine" "vm" {
 #   name                          = var.name
 #   location                      = var.rg_location
