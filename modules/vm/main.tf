@@ -41,35 +41,35 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
   network_security_group_id = azurerm_network_security_group.main.id
 }
 
-# resource "azurerm_virtual_machine" "vm" {
-#   name                          = var.name
-#   location                      = var.rg_location
-#   resource_group_name           = var.rg_name
-#   network_interface_ids         = [azurerm_network_interface.privateip.id]
-#   vm_size                       = "Standard_B2s"
-#   delete_os_disk_on_termination = true
-#
-#   storage_image_reference {
-#     id = var.storage_image_reference_id
-#   }
-#
-#   storage_os_disk {
-#     name              = "${var.name}-disk"
-#     caching           = "ReadWrite"
-#     create_option     = "FromImage"
-#     managed_disk_type = "Standard_LRS"
-#   }
-#
-#   os_profile {
-#     computer_name  = var.name
-#     admin_username = data.vault_generic_secret.ssh.data["username"]
-#     admin_password = data.vault_generic_secret.ssh.data["password"]
-#   }
-#
-#   os_profile_linux_config {
-#     disable_password_authentication = false
-#   }
-# }
+resource "azurerm_virtual_machine" "vm" {
+  name                          = var.name
+  location                      = var.rg_location
+  resource_group_name           = var.rg_name
+  network_interface_ids         = [azurerm_network_interface.privateip.id]
+  vm_size                       = var.vm_size
+  delete_os_disk_on_termination = true
+
+  storage_image_reference {
+    id = var.storage_image_reference_id
+  }
+
+  storage_os_disk {
+    name              = "${var.name}-disk"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
+  }
+
+  os_profile {
+    computer_name  = var.name
+    admin_username = data.vault_generic_secret.ssh.data["username"]
+    admin_password = data.vault_generic_secret.ssh.data["password"]
+  }
+
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+}
 #
 # resource "null_resource" "ansible" {
 #   depends_on = [

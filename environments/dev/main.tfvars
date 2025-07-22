@@ -9,6 +9,7 @@ databases = {
     rgname        = "ukwest"
     vnet_prefix   = "main"
     subnet        = "main"
+    vm_size       = "Standard_B2s"
   }
 #   rabbitmq = {
 #     rgname = "ukwest"

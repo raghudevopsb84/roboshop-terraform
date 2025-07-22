@@ -31,6 +31,7 @@ module "databases" {
   dns_record_rg_name         = var.dns_record_rg_name
   token                      = var.token
   type                       = "db"
+  vm_size                    = each.value["vm_size"]
 }
 
 

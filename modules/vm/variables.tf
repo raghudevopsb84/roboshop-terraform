@@ -7,5 +7,5 @@ variable "dns_record_rg_name" {}
 variable "token" {}
 variable "type" {}
 variable "ip_configuration_subnet_id" {}
-
+variable "vm_size" {}
 
