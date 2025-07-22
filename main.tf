@@ -19,20 +19,20 @@ output "subnet_ids" {
   value = module.vnet["main-dev"].subnet_id["main"].address_prefixes
 }
 
-# module "databases" {
-#   for_each                   = var.databases
-#   source                     = "./modules/vm"
-#   ip_configuration_subnet_id = var.ip_configuration_subnet_id
-#   name                       = each.key
-#   rg_name                    = module.resource-group[each.value["rgname"]].name
-#   rg_location                = module.resource-group[each.value["rgname"]].location
-#   storage_image_reference_id = var.storage_image_reference_id
-#   zone_name                  = var.zone_name
-#   network_security_group_id  = var.network_security_group_id
-#   dns_record_rg_name         = var.dns_record_rg_name
-#   token                      = var.token
-#   type                       = "db"
-# }
+module "databases" {
+  for_each                   = var.databases
+  source                     = "./modules/vm"
+  ip_configuration_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet_id[each.value["subnet"]].id
+  name                       = each.key
+  rg_name                    = module.resource-group[each.value["rgname"]].name
+  rg_location                = module.resource-group[each.value["rgname"]].location
+  storage_image_reference_id = var.storage_image_reference_id
+  zone_name                  = var.zone_name
+  network_security_group_id  = var.network_security_group_id
+  dns_record_rg_name         = var.dns_record_rg_name
+  token                      = var.token
+  type                       = "db"
+}
 
 
 # module "applications" {
