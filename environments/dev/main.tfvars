@@ -4,35 +4,35 @@ zone_name                  = "rdevopsb84.online"
 dns_record_rg_name         = "project-setup-1"
 storage_image_reference_id = "/subscriptions/323379f3-3beb-4865-821e-0fff68e4d4ca/resourceGroups/project-setup-1/providers/Microsoft.Compute/images/local-devops-practice"
 network_security_group_id  = "/subscriptions/323379f3-3beb-4865-821e-0fff68e4d4ca/resourceGroups/project-setup-1/providers/Microsoft.Network/networkSecurityGroups/allow-all"
-tools_vnet_resource_id = "/subscriptions/323379f3-3beb-4865-821e-0fff68e4d4ca/resourceGroups/project-setup-1/providers/Microsoft.Network/virtualNetworks/main"
+tools_vnet_resource_id     = "/subscriptions/323379f3-3beb-4865-821e-0fff68e4d4ca/resourceGroups/project-setup-1/providers/Microsoft.Network/virtualNetworks/main"
 databases = {
   mongodb = {
-    rgname        = "ukwest"
-    vnet_prefix   = "main"
-    subnet        = "main"
-    vm_size       = "Standard_B2s"
-    port          = 27017
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+    vm_size     = "Standard_B2s"
+    port        = 27017
   }
   rabbitmq = {
-    rgname = "ukwest"
-    vnet_prefix   = "main"
-    subnet        = "main"
-    vm_size       = "Standard_B2s"
-    port          = 5672
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+    vm_size     = "Standard_B2s"
+    port        = 5672
   }
   mysql = {
-    rgname = "ukwest"
-    vnet_prefix   = "main"
-    subnet        = "main"
-    vm_size       = "Standard_B2s"
-    port          = 3306
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+    vm_size     = "Standard_B2s"
+    port        = 3306
   }
   redis = {
-    rgname = "ukwest"
-    vnet_prefix   = "main"
-    subnet        = "main"
-    vm_size       = "Standard_B2s"
-    port          = 6379
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+    vm_size     = "Standard_B2s"
+    port        = 6379
   }
 }
 applications = {
@@ -64,7 +64,8 @@ rg_name = {
 
 aks = {
   main-dev = {
-    rgname = "ukwest"
+    rgname      = "ukwest"
+    vnet_prefix = "main"
     default_node_pool = {
       nodes   = 1
       vm_size = "Standard_D3_v2"
