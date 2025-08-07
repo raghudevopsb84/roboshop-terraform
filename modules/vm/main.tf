@@ -71,7 +71,6 @@ resource "azurerm_linux_virtual_machine" "main" {
     resource_group_name           = var.rg_name
     network_interface_ids         = [azurerm_network_interface.privateip.id]
     size                       = var.vm_size
-    delete_os_disk_on_termination = true
     admin_username = data.vault_generic_secret.ssh.data["username"]
   admin_password = data.vault_generic_secret.ssh.data["password"]
 
