@@ -11,3 +11,6 @@ variable "vm_size" {}
 variable "bastion_nodes" {}
 variable "port" {}
 variable "subnet_cidr" {}
+variable "disk_encryption_set_id" {}
+
+

@@ -65,6 +65,35 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
   network_security_group_id = azurerm_network_security_group.main.id
 }
 
+resource "azurerm_linux_virtual_machine" "main" {
+    name                          = var.name
+    location                      = var.rg_location
+    resource_group_name           = var.rg_name
+    network_interface_ids         = [azurerm_network_interface.privateip.id]
+    size                       = var.vm_size
+    delete_os_disk_on_termination = true
+    admin_username = data.vault_generic_secret.ssh.data["username"]
+  admin_password = data.vault_generic_secret.ssh.data["password"]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+    disk_encryption_set_id = var.disk_encryption_set_id
+    #     name              = "${var.name}-disk"
+    #     caching           = "ReadWrite"
+    #     create_option     = "FromImage"
+    #     managed_disk_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
+  }
+
+}
+
 # resource "azurerm_virtual_machine" "vm" {
 #   name                          = var.name
 #   location                      = var.rg_location

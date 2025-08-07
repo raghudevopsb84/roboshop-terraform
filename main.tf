@@ -66,6 +66,28 @@ resource "azurerm_key_vault_key" "main" {
   ]
 }
 
+variable "enc_set" {
+  default = {
+    main = {
+      rgname = "ukwest"
+    }
+  }
+}
+
+resource "azurerm_disk_encryption_set" "example" {
+  for_each = var.enc_set
+  name                = "des"
+  location                    = module.resource-group[each.value["rgname"]].location
+  resource_group_name         = module.resource-group[each.value["rgname"]].name
+  key_vault_key_id    = azurerm_key_vault_key.main["main"].versionless_id
+
+  auto_key_rotation_enabled = true
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
 
 module "vnet" {
   for_each               = var.vnets
@@ -99,6 +121,7 @@ module "databases" {
   vm_size                    = each.value["vm_size"]
   bastion_nodes              = var.bastion_nodes
   port                       = each.value["port"]
+  disk_encryption_set_id = azurerm_disk_encryption_set.example.id
 }
 
 
