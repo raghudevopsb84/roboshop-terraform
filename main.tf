@@ -121,7 +121,7 @@ module "databases" {
   vm_size                    = each.value["vm_size"]
   bastion_nodes              = var.bastion_nodes
   port                       = each.value["port"]
-  disk_encryption_set_id = azurerm_disk_encryption_set.example.id
+  disk_encryption_set_id = azurerm_disk_encryption_set.example["main"].id
 }
 
 
