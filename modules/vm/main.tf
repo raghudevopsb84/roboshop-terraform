@@ -73,6 +73,7 @@ resource "azurerm_linux_virtual_machine" "main" {
     size                       = var.vm_size
     admin_username = data.vault_generic_secret.ssh.data["username"]
   admin_password = data.vault_generic_secret.ssh.data["password"]
+  disable_password_authentication = false
 
   os_disk {
     caching              = "ReadWrite"
