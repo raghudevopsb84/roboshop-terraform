@@ -24,6 +24,48 @@ resource "azurerm_key_vault" "main" {
   purge_protection_enabled    = true
 }
 
+data "azurerm_client_config" "current" {}
+
+resource "azurerm_key_vault_access_policy" "user" {
+  key_vault_id = azurerm_key_vault.main["main"].id
+
+  tenant_id = data.azurerm_client_config.current.tenant_id
+  object_id = data.azurerm_client_config.current.object_id
+
+  key_permissions = [
+    "Create",
+    "Delete",
+    "Get",
+    "Purge",
+    "Recover",
+    "Update",
+    "List",
+    "Decrypt",
+    "Sign",
+    "GetRotationPolicy",
+  ]
+}
+
+resource "azurerm_key_vault_key" "main" {
+  name         = "main1"
+  key_vault_id = azurerm_key_vault.main["main"].id
+  key_type     = "RSA"
+  key_size     = 2048
+
+  depends_on = [
+    azurerm_key_vault_access_policy.user
+  ]
+
+  key_opts = [
+    "decrypt",
+    "encrypt",
+    "sign",
+    "unwrapKey",
+    "verify",
+    "wrapKey",
+  ]
+}
+
 
 # module "vnet" {
 #   for_each               = var.vnets
