@@ -79,7 +79,7 @@ resource "azurerm_disk_encryption_set" "example" {
   name                = "des"
   location                    = module.resource-group[each.value["rgname"]].location
   resource_group_name         = module.resource-group[each.value["rgname"]].name
-  key_vault_key_id    = azurerm_key_vault_key.main["main"].versionless_id
+  key_vault_key_id    = azurerm_key_vault_key.main.versionless_id
 
   auto_key_rotation_enabled = true
 
