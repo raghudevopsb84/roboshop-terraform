@@ -68,14 +68,7 @@ resource "azurerm_key_vault_access_policy" "for-disk" {
   tenant_id = data.azurerm_client_config.current.tenant_id
   object_id = azurerm_disk_encryption_set.main.identity.0.principal_id
 
-  key_permissions = [
-    "decrypt",
-    "encrypt",
-    "sign",
-    "unwrapKey",
-    "wrapKey",
-    "get"
-  ]
+  key_permissions = ["Get", "List", "Update", "Create", "Import", "Delete", "Recover", "Backup", "Restore", "Decrypt", "Encrypt", "UnwrapKey", "WrapKey", "Verify", "Sign", "Purge", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"]
 }
 
 
