@@ -66,18 +66,18 @@ resource "azurerm_network_interface_security_group_association" "nsg-attach" {
 }
 
 resource "azurerm_linux_virtual_machine" "main" {
-    name                          = var.name
-    location                      = var.rg_location
-    resource_group_name           = var.rg_name
-    network_interface_ids         = [azurerm_network_interface.privateip.id]
-    size                       = var.vm_size
-    admin_username = data.vault_generic_secret.ssh.data["username"]
-  admin_password = data.vault_generic_secret.ssh.data["password"]
+  name                            = var.name
+  location                        = var.rg_location
+  resource_group_name             = var.rg_name
+  network_interface_ids           = [azurerm_network_interface.privateip.id]
+  size                            = var.vm_size
+  admin_username                  = data.vault_generic_secret.ssh.data["username"]
+  admin_password                  = data.vault_generic_secret.ssh.data["password"]
   disable_password_authentication = false
 
   os_disk {
-    caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    caching                = "ReadWrite"
+    storage_account_type   = "Standard_LRS"
     disk_encryption_set_id = var.disk_encryption_set_id
     #     name              = "${var.name}-disk"
     #     caching           = "ReadWrite"

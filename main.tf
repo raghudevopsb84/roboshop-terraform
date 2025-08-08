@@ -5,90 +5,6 @@ module "resource-group" {
   location = each.value["location"]
 }
 
-variable "keys" {
-  default = {
-    main = {
-      rgname      = "ukwest"
-    }
-  }
-}
-
-resource "azurerm_key_vault" "main" {
-  for_each = var.keys
-  name                        = "rdevopsb84-tf1"
-  location                    = module.resource-group[each.value["rgname"]].location
-  resource_group_name         = module.resource-group[each.value["rgname"]].name
-  tenant_id                   = "8cfea02c-b047-4747-a322-68f6e6fbd0a7"
-  sku_name                    = "standard"
-  enabled_for_disk_encryption = true
-  purge_protection_enabled    = true
-}
-
-data "azurerm_client_config" "current" {}
-
-resource "azurerm_key_vault_access_policy" "user" {
-  key_vault_id = azurerm_key_vault.main["main"].id
-
-  tenant_id = data.azurerm_client_config.current.tenant_id
-  object_id = data.azurerm_client_config.current.object_id
-
-  key_permissions = [
-    "Create",
-    "Delete",
-    "Get",
-    "Purge",
-    "Recover",
-    "Update",
-    "List",
-    "Decrypt",
-    "Sign",
-    "GetRotationPolicy",
-  ]
-}
-
-resource "azurerm_key_vault_key" "main" {
-  name         = "main1"
-  key_vault_id = azurerm_key_vault.main["main"].id
-  key_type     = "RSA"
-  key_size     = 2048
-
-  depends_on = [
-    azurerm_key_vault_access_policy.user
-  ]
-
-  key_opts = [
-    "decrypt",
-    "encrypt",
-    "sign",
-    "unwrapKey",
-    "verify",
-    "wrapKey",
-  ]
-}
-
-variable "enc_set" {
-  default = {
-    main = {
-      rgname = "ukwest"
-    }
-  }
-}
-
-resource "azurerm_disk_encryption_set" "example" {
-  for_each = var.enc_set
-  name                = "des"
-  location                    = module.resource-group[each.value["rgname"]].location
-  resource_group_name         = module.resource-group[each.value["rgname"]].name
-  key_vault_key_id    = azurerm_key_vault_key.main.versionless_id
-
-  auto_key_rotation_enabled = true
-
-  identity {
-    type = "SystemAssigned"
-  }
-}
-
-
 module "vnet" {
   for_each               = var.vnets
   source                 = "./modules/vnet"
@@ -101,28 +17,32 @@ module "vnet" {
   tools_vnet_resource_id = var.tools_vnet_resource_id
 }
 
-output "subnet_ids" {
-  value = module.vnet["main-dev"].subnet["main"]
+module "disk_encryption_set" {
+  for_each            = var.des_keys
+  source              = "./modules/des"
+  location            = module.resource-group[each.value["rgname"]].location
+  name                = each.key
+  resource_group_name = module.resource-group[each.value["rgname"]].name
 }
 
-module "databases" {
-  for_each                   = var.databases
-  source                     = "./modules/vm"
-  ip_configuration_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
-  subnet_cidr                = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].address_prefixes
-  name                       = each.key
-  rg_name                    = module.resource-group[each.value["rgname"]].name
-  rg_location                = module.resource-group[each.value["rgname"]].location
-  storage_image_reference_id = var.storage_image_reference_id
-  zone_name                  = var.zone_name
-  dns_record_rg_name         = var.dns_record_rg_name
-  token                      = var.token
-  type                       = "db"
-  vm_size                    = each.value["vm_size"]
-  bastion_nodes              = var.bastion_nodes
-  port                       = each.value["port"]
-  disk_encryption_set_id = azurerm_disk_encryption_set.example["main"].id
-}
+# module "databases" {
+#   for_each                   = var.databases
+#   source                     = "./modules/vm"
+#   ip_configuration_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
+#   subnet_cidr                = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].address_prefixes
+#   name                       = each.key
+#   rg_name                    = module.resource-group[each.value["rgname"]].name
+#   rg_location                = module.resource-group[each.value["rgname"]].location
+#   storage_image_reference_id = var.storage_image_reference_id
+#   zone_name                  = var.zone_name
+#   dns_record_rg_name         = var.dns_record_rg_name
+#   token                      = var.token
+#   type                       = "db"
+#   vm_size                    = each.value["vm_size"]
+#   bastion_nodes              = var.bastion_nodes
+#   port                       = each.value["port"]
+#   disk_encryption_set_id     = azurerm_disk_encryption_set.example["main"].id
+# }
 
 
 # module "applications" {
