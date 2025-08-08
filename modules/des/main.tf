@@ -62,4 +62,21 @@ resource "azurerm_disk_encryption_set" "main" {
   }
 }
 
+resource "azurerm_key_vault_access_policy" "for-disk" {
+  key_vault_id = azurerm_key_vault.main.id
+
+  tenant_id = data.azurerm_client_config.current.tenant_id
+  object_id = azurerm_disk_encryption_set.main.identity.0.principal_id
+
+  key_permissions = [
+    "decrypt",
+    "encrypt",
+    "sign",
+    "unwrapKey",
+    "verify",
+    "wrapKey",
+    "get"
+  ]
+}
+
 
