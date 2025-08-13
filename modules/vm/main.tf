@@ -86,10 +86,10 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 
   source_image_reference {
-    publisher = "LDOTrail"
-    offer     = "rhel9-public"
-    sku       = "rhel9-public"
-    version   = "04.12.2024"
+    publisher = "rhel9-image"
+    offer     = "rhel9-image"
+    sku       = "rhel9-image"
+    version   = "latest"
   }
 }
 
