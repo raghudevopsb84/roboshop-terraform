@@ -27,8 +27,8 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   lifecycle {
     ignore_changes = [
-      default_node_pool,
-      upgrade_settings
+      default_node_pool
+
     ]
   }
 
@@ -46,6 +46,11 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   node_labels                 = each.value["node_labels"]
   temporary_name_for_rotation = "${each.key}temp"
   vnet_subnet_id              = var.vnet_subnet_id
+  lifecycle {
+    ignore_changes = [
+      upgrade_settings
+    ]
+  }
 }
 
 output "aks" {
