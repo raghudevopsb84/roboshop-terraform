@@ -86,9 +86,9 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 
   source_image_reference {
-    publisher = "rhel9-image"
-    offer     = "rhel9-image"
-    sku       = "rhel9-image"
+    publisher = "rhel9_public"
+    offer     = "rhel9_public"
+    sku       = "rhel9_public"
     version   = "latest"
   }
 }
