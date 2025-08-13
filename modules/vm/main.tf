@@ -89,7 +89,7 @@ resource "azurerm_linux_virtual_machine" "main" {
     publisher = "LDOTrail"
     offer     = "rhel9-public"
     sku       = "rhel9-public"
-    version   = "latest"
+    version   = "04.12.2024"
   }
 }
 
