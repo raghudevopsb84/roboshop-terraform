@@ -86,12 +86,11 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
+    publisher = "LDOTrail"
+    offer     = "rhel9-public"
+    sku       = "rhel9-public"
     version   = "latest"
   }
-
 }
 
 # resource "azurerm_virtual_machine" "vm" {
