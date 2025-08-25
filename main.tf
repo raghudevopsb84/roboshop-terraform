@@ -83,5 +83,5 @@ module "aks" {
 # }
 
 output "main" {
-  value = module.vnet
+  value = module.vnet["main-dev"].vnet_id.id
 }
