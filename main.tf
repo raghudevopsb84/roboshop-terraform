@@ -73,3 +73,13 @@ module "aks" {
   app_node_pool     = each.value["app_node_pool"]
   vnet_subnet_id    = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
 }
+
+module "mysql" {
+  for_each = var.mysql
+  source = "./modules/mysql"
+  rg_location = module.resource-group[each.value["rgname"]].location
+  rg_name = module.resource-group[each.value["rgname"]].name
+  vnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["vnet_id"]].id
+}
+
+

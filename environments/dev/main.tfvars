@@ -107,3 +107,10 @@ des_keys = {
   }
 }
 
+mysql = {
+  main = {
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+  }
+}
