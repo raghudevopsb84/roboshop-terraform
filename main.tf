@@ -76,14 +76,14 @@ module "aks" {
 }
 
 module "mysql" {
-  for_each = var.mysql
-  source = "./modules/mysql"
-  rg_location = module.resource-group[each.value["rgname"]].location
-  rg_name = module.resource-group[each.value["rgname"]].name
-  vnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].vnet_id.id
-  vnet_subnet_id    = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
-  name              = each.key
-  env               = var.env
+  for_each       = var.mysql
+  source         = "./modules/mysql"
+  rg_location    = module.resource-group[each.value["rgname"]].location
+  rg_name        = module.resource-group[each.value["rgname"]].name
+  vnet_id        = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].vnet_id.id
+  vnet_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
+  name           = each.key
+  env            = var.env
 }
 
 output "main" {

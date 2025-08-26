@@ -85,12 +85,12 @@ resource "azurerm_linux_virtual_machine" "main" {
     #     managed_disk_type = "Standard_LRS"
   }
 
-#   source_image_reference {
-#     publisher = "rhel9_public"
-#     offer     = "rhel9_public"
-#     sku       = "rhel9_public"
-#     version   = "latest"
-#   }
+  #   source_image_reference {
+  #     publisher = "rhel9_public"
+  #     offer     = "rhel9_public"
+  #     sku       = "rhel9_public"
+  #     version   = "latest"
+  #   }
   source_image_id = var.storage_image_reference_id
 }
 

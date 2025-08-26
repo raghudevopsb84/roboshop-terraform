@@ -13,27 +13,27 @@ databases = {
     vm_size     = "Standard_B2s"
     port        = 27017
   }
-    rabbitmq = {
-      rgname      = "ukwest"
-      vnet_prefix = "main"
-      subnet      = "main"
-      vm_size     = "Standard_B2s"
-      port        = 5672
-    }
-    mysql = {
-      rgname      = "ukwest"
-      vnet_prefix = "main"
-      subnet      = "main"
-      vm_size     = "Standard_B2s"
-      port        = 3306
-    }
-    redis = {
-      rgname      = "ukwest"
-      vnet_prefix = "main"
-      subnet      = "main"
-      vm_size     = "Standard_B2s"
-      port        = 6379
-    }
+  rabbitmq = {
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+    vm_size     = "Standard_B2s"
+    port        = 5672
+  }
+  mysql = {
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+    vm_size     = "Standard_B2s"
+    port        = 3306
+  }
+  redis = {
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+    vm_size     = "Standard_B2s"
+    port        = 6379
+  }
 }
 applications = {
   catalogue = {
@@ -107,7 +107,7 @@ vnets = {
         delegations = {
           mysql = {
             name    = "Microsoft.DBforMySQL/flexibleServers"
-            actions = [ "Microsoft.Network/virtualNetworks/subnets/join/action" ]
+            actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
           }
         }
       }
@@ -127,7 +127,7 @@ des_keys = {
 mysql = {
   main = {
     rgname      = "ukwest"
-    vnet_prefix = "main"
+    vnet_prefix = "ext1"
     subnet      = "main"
   }
 }
