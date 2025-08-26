@@ -17,33 +17,33 @@ module "vnet" {
   tools_vnet_resource_id = var.tools_vnet_resource_id
   delegations            = lookup(lookup(each.value["subnets"], "main", {} ), "delegations", {})
 }
-#
-# module "disk_encryption_set" {
-#   for_each            = var.des_keys
-#   source              = "./modules/des"
-#   location            = module.resource-group[each.value["rgname"]].location
-#   name                = each.key
-#   resource_group_name = module.resource-group[each.value["rgname"]].name
-# }
 
-# module "databases" {
-#   for_each                   = var.databases
-#   source                     = "./modules/vm"
-#   ip_configuration_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
-#   subnet_cidr                = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].address_prefixes
-#   name                       = each.key
-#   rg_name                    = module.resource-group[each.value["rgname"]].name
-#   rg_location                = module.resource-group[each.value["rgname"]].location
-#   storage_image_reference_id = var.storage_image_reference_id
-#   zone_name                  = var.zone_name
-#   dns_record_rg_name         = var.dns_record_rg_name
-#   token                      = var.token
-#   type                       = "db"
-#   vm_size                    = each.value["vm_size"]
-#   bastion_nodes              = var.bastion_nodes
-#   port                       = each.value["port"]
-#   disk_encryption_set_id     = module.disk_encryption_set["rdevopsb84-tf1"].des_id
-# }
+module "disk_encryption_set" {
+  for_each            = var.des_keys
+  source              = "./modules/des"
+  location            = module.resource-group[each.value["rgname"]].location
+  name                = each.key
+  resource_group_name = module.resource-group[each.value["rgname"]].name
+}
+
+module "databases" {
+  for_each                   = var.databases
+  source                     = "./modules/vm"
+  ip_configuration_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
+  subnet_cidr                = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].address_prefixes
+  name                       = each.key
+  rg_name                    = module.resource-group[each.value["rgname"]].name
+  rg_location                = module.resource-group[each.value["rgname"]].location
+  storage_image_reference_id = var.storage_image_reference_id
+  zone_name                  = var.zone_name
+  dns_record_rg_name         = var.dns_record_rg_name
+  token                      = var.token
+  type                       = "db"
+  vm_size                    = each.value["vm_size"]
+  bastion_nodes              = var.bastion_nodes
+  port                       = each.value["port"]
+  disk_encryption_set_id     = module.disk_encryption_set["rdevopsb84-tf1"].des_id
+}
 
 
 # module "applications" {
@@ -62,30 +62,30 @@ module "vnet" {
 #   type                       = "app"
 # }
 
-# module "aks" {
-#   for_each          = var.aks
-#   source            = "./modules/aks"
-#   name              = each.key
-#   rg_name           = module.resource-group[each.value["rgname"]].name
-#   rg_location       = module.resource-group[each.value["rgname"]].location
-#   env               = var.env
-#   token             = var.token
-#   default_node_pool = each.value["default_node_pool"]
-#   app_node_pool     = each.value["app_node_pool"]
-#   vnet_subnet_id    = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
-# }
+module "aks" {
+  for_each          = var.aks
+  source            = "./modules/aks"
+  name              = each.key
+  rg_name           = module.resource-group[each.value["rgname"]].name
+  rg_location       = module.resource-group[each.value["rgname"]].location
+  env               = var.env
+  token             = var.token
+  default_node_pool = each.value["default_node_pool"]
+  app_node_pool     = each.value["app_node_pool"]
+  vnet_subnet_id    = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
+}
 
-# module "mysql" {
-#   for_each       = var.mysql
-#   source         = "./modules/mysql"
-#   rg_location    = module.resource-group[each.value["rgname"]].location
-#   rg_name        = module.resource-group[each.value["rgname"]].name
-#   vnet_id        = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].vnet_id.id
-#   vnet_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
-#   name           = each.key
-#   env            = var.env
-# }
-#
-# output "main" {
-#   value = module.vnet["main-dev"].vnet_id.id
-# }
+module "mysql" {
+  for_each       = var.mysql
+  source         = "./modules/mysql"
+  rg_location    = module.resource-group[each.value["rgname"]].location
+  rg_name        = module.resource-group[each.value["rgname"]].name
+  vnet_id        = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].vnet_id.id
+  vnet_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
+  name           = each.key
+  env            = var.env
+}
+
+output "main" {
+  value = module.vnet["main-dev"].vnet_id.id
+}
