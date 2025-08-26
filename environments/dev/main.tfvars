@@ -104,11 +104,11 @@ vnets = {
     subnets = {
       main = {
         address_prefixes = ["10.51.0.0/24"]
-      }
-      delegations = {
-        mysql = {
-          name    = "Microsoft.DBforMySQL/flexibleServers"
-          actions = [ "Microsoft.Network/virtualNetworks/subnets/join/action" ]
+        delegations = {
+          mysql = {
+            name    = "Microsoft.DBforMySQL/flexibleServers"
+            actions = [ "Microsoft.Network/virtualNetworks/subnets/join/action" ]
+          }
         }
       }
     }
