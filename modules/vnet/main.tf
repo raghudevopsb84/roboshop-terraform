@@ -3,17 +3,6 @@ resource "azurerm_virtual_network" "main" {
   location            = var.location
   resource_group_name = var.resource_group_name
   address_space       = var.address_space
-
-  dynamic "delegation" {
-    for_each = var.delegations
-    content {
-      name = delegation.key
-      service_delegation {
-        name    = delegation.value["name"]
-        actions = delegation.value["actions"]
-      }
-    }
-  }
 }
 
 resource "azurerm_subnet" "main" {
