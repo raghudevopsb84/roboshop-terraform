@@ -15,6 +15,7 @@ module "vnet" {
   subnets                = each.value["subnets"]
   env                    = var.env
   tools_vnet_resource_id = var.tools_vnet_resource_id
+  delegations            = each.value["subnets"]["delegations"]
 }
 
 module "disk_encryption_set" {
