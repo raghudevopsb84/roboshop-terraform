@@ -86,6 +86,6 @@ module "mysql" {
   env            = var.env
 }
 
-output "main" {
-  value = module.vnet["main-dev"].vnet_id.id
-}
+# output "main" {
+#   value = module.vnet["main-dev"].vnet_id.id
+# }
