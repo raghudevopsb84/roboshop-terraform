@@ -117,7 +117,7 @@ des_keys = {
 mysql = {
   main = {
     rgname      = "ukwest"
-    vnet_prefix = "ext1"
+    vnet_prefix = "main"
     subnet      = "main"
   }
 }
