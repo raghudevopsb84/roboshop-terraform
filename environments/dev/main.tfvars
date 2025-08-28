@@ -9,28 +9,28 @@ databases = {
   mongodb = {
     rgname      = "ukwest"
     vnet_prefix = "main"
-    subnet      = "main"
+    subnet      = "vm"
     vm_size     = "Standard_B2s"
     port        = 27017
   }
   rabbitmq = {
     rgname      = "ukwest"
     vnet_prefix = "main"
-    subnet      = "main"
+    subnet      = "vm"
     vm_size     = "Standard_B2s"
     port        = 5672
   }
   mysql = {
     rgname      = "ukwest"
     vnet_prefix = "main"
-    subnet      = "main"
+    subnet      = "vm"
     vm_size     = "Standard_B2s"
     port        = 3306
   }
   redis = {
     rgname      = "ukwest"
     vnet_prefix = "main"
-    subnet      = "main"
+    subnet      = "vm"
     vm_size     = "Standard_B2s"
     port        = 6379
   }
@@ -55,6 +55,7 @@ applications = {
     rgname = "ukwest"
   }
 }
+
 rg_name = {
   ukwest = {
     location = "UK West"
@@ -66,7 +67,7 @@ aks = {
   main-dev = {
     rgname      = "ukwest"
     vnet_prefix = "main"
-    subnet      = "main"
+    subnet      = "aks"
     default_node_pool = {
       nodes   = 1
       vm_size = "Standard_D3_v2"
@@ -100,6 +101,14 @@ vnets = {
             actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
           }
         }
+      }
+      aks = {
+        address_prefixes = ["10.51.1.0/24"]
+        delegations = {}
+      }
+      vm = {
+        address_prefixes = ["10.51.2.0/24"]
+        delegations = {}
       }
     }
   }
