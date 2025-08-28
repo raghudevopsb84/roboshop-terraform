@@ -15,7 +15,7 @@ module "vnet" {
   subnets                = each.value["subnets"]
   env                    = var.env
   tools_vnet_resource_id = var.tools_vnet_resource_id
-  delegations            = lookup(lookup(each.value["subnets"], "main", {} ), "delegations", {})
+  #delegations            = lookup(lookup(each.value["subnets"], "main", {} ), "delegations", {})
 }
 
 module "disk_encryption_set" {

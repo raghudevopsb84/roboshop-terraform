@@ -13,7 +13,7 @@ resource "azurerm_subnet" "main" {
   address_prefixes     = each.value["address_prefixes"]
 
   dynamic "delegation" {
-    for_each = var.delegations
+    for_each = each.value.delegations
     content {
       name = delegation.key
       service_delegation {
