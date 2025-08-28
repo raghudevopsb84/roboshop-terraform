@@ -88,7 +88,7 @@ aks = {
 
 
 vnets = {
-  main-dev = {
+  main = {
     rgname        = "ukwest"
     address_space = ["10.51.0.0/16"]
     subnets = {
