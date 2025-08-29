@@ -20,6 +20,7 @@ resource "azurerm_mysql_flexible_server" "main" {
   delegated_subnet_id    = var.vnet_subnet_id
   private_dns_zone_id    = azurerm_private_dns_zone.main.id
   sku_name               = "GP_Standard_D2ds_v4"
+  version                = "8.0.21"
 }
 
 
