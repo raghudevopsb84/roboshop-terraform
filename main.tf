@@ -42,6 +42,7 @@ module "databases" {
   vm_size                    = each.value["vm_size"]
   bastion_nodes              = var.bastion_nodes
   port                       = each.value["port"]
+  nsg_cidr                   = each.value["nsg_cidr"]
   disk_encryption_set_id     = module.disk_encryption_set["rdevopsb84-tf1"].des_id
 }
 

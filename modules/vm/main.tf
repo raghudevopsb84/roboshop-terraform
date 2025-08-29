@@ -55,7 +55,7 @@ resource "azurerm_network_security_group" "main" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = var.port
-    source_address_prefixes    = var.subnet_cidr
+    source_address_prefixes    = var.nsg_cidr
     destination_address_prefix = "*"
   }
 }

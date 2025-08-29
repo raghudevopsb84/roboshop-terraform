@@ -12,6 +12,7 @@ databases = {
     subnet      = "vm"
     vm_size     = "Standard_B2s"
     port        = 27017
+    nsg_cidr    = ["10.51.1.0/24"]
   }
   rabbitmq = {
     rgname      = "ukwest"
@@ -19,6 +20,7 @@ databases = {
     subnet      = "vm"
     vm_size     = "Standard_B2s"
     port        = 5672
+    nsg_cidr    = ["10.51.1.0/24"]
   }
   mysql = {
     rgname      = "ukwest"
@@ -26,6 +28,7 @@ databases = {
     subnet      = "vm"
     vm_size     = "Standard_B2s"
     port        = 3306
+    nsg_cidr    = ["10.51.1.0/24"]
   }
   redis = {
     rgname      = "ukwest"
@@ -33,6 +36,7 @@ databases = {
     subnet      = "vm"
     vm_size     = "Standard_B2s"
     port        = 6379
+    nsg_cidr    = ["10.51.1.0/24"]
   }
 }
 applications = {

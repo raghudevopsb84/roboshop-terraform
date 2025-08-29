@@ -12,5 +12,6 @@ variable "bastion_nodes" {}
 variable "port" {}
 variable "subnet_cidr" {}
 variable "disk_encryption_set_id" {}
+variable "nsg_cidr" {}
 
 
