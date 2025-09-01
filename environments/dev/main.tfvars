@@ -148,7 +148,7 @@ application_gateway = {
   main = {
     rgname      = "ukwest"
     vnet_prefix = "main"
-    subnet      = "main"
+    subnet      = "agw"
   }
 }
 

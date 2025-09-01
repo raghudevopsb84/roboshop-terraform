@@ -92,4 +92,5 @@ module "application-gateway" {
   source = "./modules/application-gateway"
   rg_location    = module.resource-group[each.value["rgname"]].location
   rg_name        = module.resource-group[each.value["rgname"]].name
+  vnet_subnet_id = module.vnet["${each.value["vnet_prefix"]}-${var.env}"].subnet[each.value["subnet"]].id
 }
