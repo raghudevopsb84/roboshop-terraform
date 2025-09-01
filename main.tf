@@ -87,9 +87,9 @@ module "disk_encryption_set" {
 #   env            = var.env
 # }
 
-module "application-gateway" {
-  for_each = var.application_gateway
-  source = "./modules/application-gateway"
-  rg_location    = module.resource-group[each.value["rgname"]].location
-  rg_name        = module.resource-group[each.value["rgname"]].name
-}
+# module "application-gateway" {
+#   for_each = var.application_gateway
+#   source = "./modules/application-gateway"
+#   rg_location    = module.resource-group[each.value["rgname"]].location
+#   rg_name        = module.resource-group[each.value["rgname"]].name
+# }
