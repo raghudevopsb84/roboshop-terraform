@@ -19,11 +19,6 @@ resource "azurerm_application_gateway" "appgw" {
     capacity = 2
   }
 
-  autoscale_configuration {
-    min_capacity = 2
-    max_capacity = 10
-  }
-
   gateway_ip_configuration {
     name      = "my-appgw-ip-config"
     subnet_id = var.vnet_subnet_id
