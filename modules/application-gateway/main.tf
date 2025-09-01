@@ -26,7 +26,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   gateway_ip_configuration {
     name      = "my-appgw-ip-config"
-    subnet_id = azurerm_subnet.appgw_subnet.id
+    subnet_id = var.vnet_subnet_id
   }
 
   # Frontend Public IP Configuration
