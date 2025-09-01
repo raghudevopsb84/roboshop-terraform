@@ -87,6 +87,9 @@ module "mysql" {
   env            = var.env
 }
 
-# output "main" {
-#   value = module.vnet["main-dev"].vnet_id.id
+# module "application-gateway" {
+#   for_each = var.application_gateway
+#   source = "./modules/application-gateway"
+#   rg_location    = module.resource-group[each.value["rgname"]].location
+#   rg_name        = module.resource-group[each.value["rgname"]].name
 # }

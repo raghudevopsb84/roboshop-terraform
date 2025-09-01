@@ -114,6 +114,15 @@ vnets = {
         address_prefixes = ["10.51.2.0/24"]
         delegations = {}
       }
+      agw = {
+        address_prefixes = ["10.51.3.0/24"]
+        delegations = {
+          agw = {
+            name    = "Microsoft.Network/applicationGateways"
+            actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
+          }
+        }
+      }
     }
   }
 
@@ -134,3 +143,12 @@ mysql = {
     subnet      = "main"
   }
 }
+
+application_gateway = {
+  main = {
+    rgname      = "ukwest"
+    vnet_prefix = "main"
+    subnet      = "main"
+  }
+}
+
