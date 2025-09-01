@@ -69,6 +69,7 @@ resource "azurerm_application_gateway" "appgw" {
     backend_address_pool_name  = "backend-pool"
     backend_http_settings_name = "http-settings"
     rule_type                  = "Basic"
+    priority                   = 100
   }
 
   # WAF Configuration
